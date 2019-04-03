@@ -27,6 +27,12 @@ export default class GameActorStatusMachine {
         this.currentStatus.machine = this;
         this.currentStatus.onEnterStatus();
     }
+
+    update(dt){
+        if(this.currentStatus){
+            this.currentStatus.update(dt);
+        }
+    }
     
 }
 
@@ -34,6 +40,7 @@ export class GameActorStatusBase {
     status: GameActorStatusType = GameActorStatusType.None;
     machine: GameActorStatusMachine = null;
 
+    statusTime: number = 0;
     onEnterStatus(){
 
     }
@@ -43,7 +50,7 @@ export class GameActorStatusBase {
     }
 
     update(dt){
-
+        this.statusTime += dt;
     }
     
 }
@@ -59,19 +66,21 @@ export class GameActorStatusWalk extends GameActorStatusBase {
     nextPathPoint: cc.Vec2;
     moveDir: cc.Vec2;
     dir: GameDirection;
-
+    
     onEnterStatus(){
-        this.paths = (this.machine.actor as GameWalker).getPaths();
+        // this.paths = (this.machine.actor as GameWalker).getPaths();
         this.currentPathPointIndex = 0;
+        this.machine.actor.node.x = this.paths[0].x;
+        this.machine.actor.node.y = this.paths[0].y;
         this.goToNextPoint();
-
     }
 
     goToNextPoint(){
         this.nextPathPoint = this.getNextPathPoint();
 
         if(this.nextPathPoint){
-            this.moveDir = cc.pNormalize(cc.pSub(this.nextPathPoint, this.machine.actor.node.position));
+            let ad = this.nextPathPoint.sub(this.machine.actor.node.position);
+            this.moveDir = ad.normalize();
             this.dir = this.getDir(this.machine.actor.node.position, this.nextPathPoint);
             this.currentPathPointIndex ++;
         }
@@ -109,6 +118,30 @@ export class GameActorStatusWalk extends GameActorStatusBase {
 
     update(dt: number){
         super.update(dt);
+
+        this.machine.actor.preferStatus(this);
+
+        if(!this.nextPathPoint){
+            return;
+        }
+
+        let currentPos = this.machine.actor.node.position;
+        let speed = (this.machine.actor as GameWalker).speed;
+        this.machine.actor.node.x = cc.misc.clampf(
+            currentPos.x + this.moveDir.x * dt * speed, 
+            Math.min(currentPos.x, this.nextPathPoint.x), 
+            Math.max(currentPos.x, this.nextPathPoint.x)
+        );
+        this.machine.actor.node.y = cc.misc.clampf(
+            currentPos.y + this.moveDir.y * dt * speed, 
+            Math.min(currentPos.y, this.nextPathPoint.y), 
+            Math.max(currentPos.y, this.nextPathPoint.y)
+        );
+
+        if(this.machine.actor.node.x == this.nextPathPoint.x && this.machine.actor.node.y == this.nextPathPoint.y){
+            console.log(this.nextPathPoint);
+            this.goToNextPoint();
+        }
     }
 }
 

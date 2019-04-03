@@ -16,4 +16,13 @@ export default class Utils {
 
         return cc.v2(x, y);
     }
+
+    static tilePolylineForPositions(startPos: cc.Vec2, points: cc.Vec2[]): cc.Vec2[]{
+        let paths: cc.Vec2[] = [];
+        paths[0] = startPos;
+        for(let i = 1;i < points.length; i++){
+            paths[i] = cc.v2(startPos.x + points[i].x, startPos.y - points[i].y);
+        }
+        return paths;
+    }
 }

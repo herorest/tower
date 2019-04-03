@@ -183,7 +183,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "spWalker": null,
+    "spWalker": {
+      "__id__": 3
+    },
     "spWalkUp": [
       {
         "__uuid__": "23c9a2ac-b17e-47be-8a48-47e5cab0afa1"
@@ -299,7 +301,7 @@
       }
     ],
     "animWalkTotalTime": 1,
-    "speed": 20,
+    "speed": 50,
     "_id": ""
   },
   {
