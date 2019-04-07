@@ -43,7 +43,6 @@ export default class Main extends cc.Component {
         
         let walk = new GameActorStatusWalk();
         walk.paths = Utils.tilePolylineForPositions(Utils.tileCoordForPosition(this.map, path0.offset), path0.polylinePoints);
-        console.log(walk);
         enemy.machine.onStatusChange(walk);
     }
 }

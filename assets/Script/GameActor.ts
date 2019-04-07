@@ -1,4 +1,5 @@
 import GameActorStatusMachine, {GameActorStatusBase} from './GameActorStatusMachine'
+import Utils from './Utils';
 
 const { ccclass, property } = cc._decorator;
 
@@ -6,6 +7,8 @@ const { ccclass, property } = cc._decorator;
 export default class GameActor extends cc.Component {
 
     machine: GameActorStatusMachine = null;
+
+    attackCoolDownTime: number = 1;
 
     onLoad(){
         this.machine = new GameActorStatusMachine(this);
@@ -16,8 +19,17 @@ export default class GameActor extends cc.Component {
 
     }
 
+    getEnemysInRange(): GameActor[]{
+        return null;
+    }
+
     update(dt){
         this.machine.update(dt);
     }
    
+    getEnemyDir(enemys: GameActor[]): GameDirection{
+        let enemy = enemys[0];
+        let ad = enemy.node.position.sub(this.node.position);
+        return Utils.getDir(ad);
+    }
 }

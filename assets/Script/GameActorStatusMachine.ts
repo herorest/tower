@@ -57,6 +57,20 @@ export class GameActorStatusBase {
 
 export class GameActorStatusIdle extends GameActorStatusBase {
     status = GameActorStatusType.Idle;
+
+    onEnterStatus(){
+        this.machine.actor.preferStatus(this);
+    }
+
+    update(dt){
+        super.update(dt);
+        let enemys = this.machine.actor.getEnemysInRange();
+
+        if(enemys && enemys.length > 0 && this.statusTime > this.machine.actor.attackCoolDownTime){
+            let attack = new GameActorStatusAttack();
+            this.machine.onStatusChange(attack);
+        }
+    }
 }
 
 export class GameActorStatusWalk extends GameActorStatusBase {
@@ -88,25 +102,7 @@ export class GameActorStatusWalk extends GameActorStatusBase {
 
     getDir(from: cc.Vec2, to: cc.Vec2): GameDirection{
         let ad = to.sub(from);
-        let angle = cc.radiansToDegrees(Math.atan2(ad.y, ad.x));
-
-        // console.log(angle);
-
-        if(angle > 360){
-            angle -= 360;
-        }else if(angle < 0){
-            angle += 360;
-        }
-
-        if(angle > 45 && angle <= 135){
-            return GameDirection.Up;
-        }if(angle > 225 && angle <= 315){
-            return GameDirection.Down;
-        }if(angle > 135 && angle <= 225){
-            return GameDirection.Left;
-        }else{
-            return GameDirection.Right;
-        }
+        return Utils.getDir(ad);
     }
 
     getNextPathPoint(): cc.Vec2{
@@ -139,7 +135,6 @@ export class GameActorStatusWalk extends GameActorStatusBase {
         );
 
         if(this.machine.actor.node.x == this.nextPathPoint.x && this.machine.actor.node.y == this.nextPathPoint.y){
-            console.log(this.nextPathPoint);
             this.goToNextPoint();
         }
     }
@@ -147,6 +142,16 @@ export class GameActorStatusWalk extends GameActorStatusBase {
 
 export class GameActorStatusAttack extends GameActorStatusBase {
     status = GameActorStatusType.Attack;
+    dir: GameDirection;
+
+    update(dt: number){
+        super.update(dt);
+        this.machine.actor.preferStatus(this);
+    }
+
+    getEnemyDir(enemys: GameActor[]): GameDirection{
+        return this.machine.actor.getEnemyDir(enemys);
+    }
 }
 
 export class GameActorStatusDie extends GameActorStatusBase {

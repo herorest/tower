@@ -25,4 +25,26 @@ export default class Utils {
         }
         return paths;
     }
+
+    static getDir(vec2: cc.Vec2): GameDirection{
+        let angle = cc.radiansToDegrees(Math.atan2(vec2));
+
+        // console.log(angle);
+
+        if(angle > 360){
+            angle -= 360;
+        }else if(angle < 0){
+            angle += 360;
+        }
+
+        if(angle > 45 && angle <= 135){
+            return GameDirection.Up;
+        }if(angle > 225 && angle <= 315){
+            return GameDirection.Down;
+        }if(angle > 135 && angle <= 225){
+            return GameDirection.Left;
+        }else{
+            return GameDirection.Right;
+        }
+    }
 }
