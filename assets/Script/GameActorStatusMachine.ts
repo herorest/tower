@@ -69,6 +69,7 @@ export class GameActorStatusIdle extends GameActorStatusBase {
         if(enemys && enemys.length > 0 && this.statusTime > this.machine.actor.attackCoolDownTime){
             let attack = new GameActorStatusAttack();
             this.machine.onStatusChange(attack);
+            attack.dir = attack.getEnemyDir(enemys);
         }
     }
 }
@@ -143,10 +144,22 @@ export class GameActorStatusWalk extends GameActorStatusBase {
 export class GameActorStatusAttack extends GameActorStatusBase {
     status = GameActorStatusType.Attack;
     dir: GameDirection;
+    isAttacked: boolean = false;
+
+    onEnterStatus(){
+        super.onEnterStatus();
+    }
 
     update(dt: number){
         super.update(dt);
         this.machine.actor.preferStatus(this);
+        let percent = this.statusTime / this.machine.actor.attackAnimTotalTime;
+
+        if(percent > 1){
+            // 重新进入空闲状态
+            let idle = new GameActorStatusIdle();
+            this.machine.onStatusChange(idle);
+        }
     }
 
     getEnemyDir(enemys: GameActor[]): GameDirection{
