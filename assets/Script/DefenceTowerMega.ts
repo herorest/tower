@@ -5,7 +5,7 @@ import { GameDirection } from './Config';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class DefenceTowerMega extends cc.Component {
+export default class DefenceTowerMega extends GameActor {
 
     @property(cc.Sprite)
     spMega: cc.Sprite = null;
@@ -42,6 +42,12 @@ export default class DefenceTowerMega extends cc.Component {
     preferStatus(status: GameActorStatusBase){
         if(status.status == GameActorStatusType.Attack){
             let attackStatus = status as GameActorStatusAttack;
+            let percent = status.statusTime / this.attackAnimTotalTime;
+            let frames = attackStatus.dir === GameDirection.Up ? this.sfMegaAttackFronts : this.sfMegaAttackBacks;
+            let currentFrame = this.preferAnimFrame(this.spMega, frames, percent);
+            if(!attackStatus.isAttacked && currentFrame == frames[this.attackKeyFrame]){
+                this.attack();
+            }
         }
     }
 
