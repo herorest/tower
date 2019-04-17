@@ -32,7 +32,7 @@ export default class DefenceTowerMega extends GameActor {
     sfTowerAttacks: cc.SpriteFrame[] = [];
 
     onLoad(){
-        
+        super.onLoad();
     }
 
     update(dt){

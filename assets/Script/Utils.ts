@@ -1,3 +1,4 @@
+import {GameDirection} from './Config'
 export default class Utils {
 
     /**

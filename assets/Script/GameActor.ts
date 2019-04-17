@@ -1,6 +1,7 @@
 import GameActorStatusMachine, {GameActorStatusBase, GameActorStatusAttack} from './GameActorStatusMachine'
 import Utils from './Utils';
 import { GameDirection } from './Config';
+import Main from './main';
 
 const { ccclass, property } = cc._decorator;
 
@@ -12,6 +13,8 @@ export default class GameActor extends cc.Component {
     attackCoolDownTime: number = 1;
 
     attackAnimTotalTime: number = 1;
+
+    paths: cc.Vec2[];
 
     //发射子弹时的帧
     @property(Number) 
@@ -31,7 +34,7 @@ export default class GameActor extends cc.Component {
     }
 
     getEnemysInRange(): GameActor[]{
-        return null;
+        return Main.getInstance().enemys;
     }
 
     update(dt){

@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.19208526611328125,
+      "y": 0.19208526611328125,
       "z": 1
     },
     "_quat": {
@@ -599,6 +599,9 @@
     },
     "prefabEnemy": {
       "__uuid__": "6a100e87-3721-4dad-ba15-c5e08f1e5b8b"
+    },
+    "prefabTower": {
+      "__uuid__": "5d46ce5c-6262-4b51-ae24-81ab40d7b9cb"
     },
     "_id": "48COLGIsxIJpV22aM4OlCe"
   },
