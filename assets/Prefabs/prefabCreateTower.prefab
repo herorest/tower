@@ -40,10 +40,13 @@
     "_components": [
       {
         "__id__": 112
+      },
+      {
+        "__id__": 113
       }
     ],
     "_prefab": {
-      "__id__": 113
+      "__id__": 114
     },
     "_opacity": 255,
     "_color": {
@@ -4179,6 +4182,16 @@
     "spBar": {
       "__id__": 109
     },
+    "_id": ""
+  },
+  {
+    "__type__": "f0fc8ndyxdArb1JJellkPxN",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {

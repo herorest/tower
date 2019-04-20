@@ -2,11 +2,12 @@ import GameActorStatusMachine, {GameActorStatusBase, GameActorStatusAttack} from
 import Utils from './Utils';
 import { GameDirection } from './Config';
 import Main from './main';
+import GameEventListener from './GameEventListener';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class GameActor extends cc.Component {
+export default class GameActor extends GameEventListener {
 
     machine: GameActorStatusMachine = null;
 
@@ -25,6 +26,7 @@ export default class GameActor extends cc.Component {
     attackRange: number = 200;
 
     onLoad(){
+        super.onLoad();
         this.machine = new GameActorStatusMachine(this);
     }
 

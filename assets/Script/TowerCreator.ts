@@ -1,4 +1,6 @@
+import { GameEventCreateTower } from './GameEventDefine';
 import { DefenceTowerType } from "./Config";
+import GameEventDispatcher from './GameEventDispatcher';
 
 /*
 ** 1 箭塔 archer
@@ -113,6 +115,11 @@ export default class TowerCreator extends cc.Component {
             this.spBar.fillRange = Math.min(1, this.spBar.fillRange);
             if(this.spBar.fillRange === 1){
                 this.status = TowerCreatorStatus.None;
+
+                let  event = new GameEventCreateTower();
+                event.pos = this.node.position;
+                event.towerType = this.currentSelectTower;
+                GameEventDispatcher.getInstance().dispatchEvent(event);
             }
         }
     }

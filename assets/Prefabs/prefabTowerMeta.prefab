@@ -291,6 +291,8 @@
       "__id__": 1
     },
     "_enabled": true,
+    "attackKeyFrame": 7,
+    "attackRange": 200,
     "spMega": {
       "__id__": 6
     },
