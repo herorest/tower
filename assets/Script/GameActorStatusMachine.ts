@@ -58,14 +58,15 @@ export class GameActorStatusBase {
 export class GameActorStatusIdle extends GameActorStatusBase {
     status = GameActorStatusType.Idle;
 
+    //接收状态，转换精灵图
     onEnterStatus(){
+        console.log('------------enter Status', this.status);
         this.machine.actor.preferStatus(this);
     }
 
     update(dt){
         super.update(dt);
         let enemys = this.machine.actor.getEnemysInRange();
-
         if(enemys && enemys.length > 0 && this.statusTime > this.machine.actor.attackCoolDownTime){
             let attack = new GameActorStatusAttack();
             this.machine.onStatusChange(attack);
@@ -154,7 +155,6 @@ export class GameActorStatusAttack extends GameActorStatusBase {
         super.update(dt);
         this.machine.actor.preferStatus(this);
         let percent = this.statusTime / this.machine.actor.attackAnimTotalTime;
-
         if(percent > 1){
             // 重新进入空闲状态
             let idle = new GameActorStatusIdle();

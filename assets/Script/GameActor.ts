@@ -11,6 +11,7 @@ export default class GameActor extends GameEventListener {
 
     machine: GameActorStatusMachine = null;
 
+    // 攻击间隔时间
     attackCoolDownTime: number = 1;
 
     attackAnimTotalTime: number = 1;

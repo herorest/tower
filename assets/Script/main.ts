@@ -44,12 +44,10 @@ export default class Main extends GameEventListener {
         // 创建塔
         let towers = this.map.getObjectGroup('towers');
         let tower0 = towers.getObject('tower0');
-
         let towerCreator = cc.instantiate(this.prefabTowerCreator);
         towerCreator.parent = this.towersParent;
         towerCreator.position = Utils.tileCoordForPosition(this.map, tower0.offset);
 
-        // let node = towerCreator.getComponent<TowerCreator>(TowerCreator)
 
         // 测试路径
         let paths = this.map.getObjectGroup('paths');
@@ -77,8 +75,10 @@ export default class Main extends GameEventListener {
         if(towerType == DefenceTowerType.Mega){
             let tower = cc.instantiate(this.prefabTowerMeta).getComponent('DefenceTowerMega') as DefenceTowerMega;
             tower.node.parent = this.towersParent;
-            tower.node.position = event.pos
-            tower.machine.onStatusChange(new GameActorStatusIdle());
+            tower.node.position = event.pos;
+
+            let idle = new GameActorStatusIdle();
+            tower.machine.onStatusChange(idle);
     
         }
 

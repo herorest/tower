@@ -36,14 +36,14 @@ export default class DefenceTowerMega extends GameActor {
     }
 
     update(dt){
-
+        super.update(dt);
     }
 
     preferStatus(status: GameActorStatusBase){
         if(status.status == GameActorStatusType.Attack){
             let attackStatus = status as GameActorStatusAttack;
-            let percent = status.statusTime / this.attackAnimTotalTime;
-            let frames = attackStatus.dir === GameDirection.Up ? this.sfMegaAttackFronts : this.sfMegaAttackBacks;
+            let percent = (status.statusTime / this.attackAnimTotalTime) % 1;
+            let frames = attackStatus.dir === GameDirection.Up ? this.sfMegaAttackBacks : this.sfMegaAttackFronts;
             let currentFrame = this.preferAnimFrame(this.spMega, frames, percent);
             if(!attackStatus.isAttacked && currentFrame == frames[this.attackKeyFrame]){
                 this.attack();
