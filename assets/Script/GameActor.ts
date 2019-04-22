@@ -56,9 +56,5 @@ export default class GameActor extends GameEventListener {
         console.log('attack');
     }
 
-    //展示动画，根据百分比
-    preferAnimFrame(sprite: cc.Sprite, frames: cc.SpriteFrame[], percent: number): SpriteFrame{
-        sprite.spriteFrame = frames[Math.floor(frames.length * percent)];
-        return sprite.spriteFrame;
-    }
+    
 }

@@ -1,6 +1,7 @@
 import GameActor from "./GameActor";
 import {GameActorStatusBase, GameActorStatusType, GameActorStatusWalk} from './GameActorStatusMachine'
 import { GameDirection } from "./Config";
+import Utils from "./Utils";
 
 const { ccclass, property } = cc._decorator;
 
@@ -59,7 +60,7 @@ export default class GameWalker extends GameActor {
                 spriteFrames = this.spWalkRight;
             }
 
-            this.preferAnimFrame(this.spWalker, spriteFrames, percent);
+            Utils.preferAnimFrame(this.spWalker, spriteFrames, percent);
             this.spWalker.node.scaleX = scaleX;
         }
     }

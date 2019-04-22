@@ -47,4 +47,10 @@ export default class Utils {
             return GameDirection.Right;
         }
     }
+    
+    //展示动画，根据百分比
+    static preferAnimFrame(sprite: cc.Sprite, frames: cc.SpriteFrame[], percent: number): SpriteFrame{
+        sprite.spriteFrame = frames[Math.floor(frames.length * percent)];
+        return sprite.spriteFrame;
+    }
 }
