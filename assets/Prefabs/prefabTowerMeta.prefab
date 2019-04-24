@@ -293,6 +293,9 @@
     "_enabled": true,
     "attackKeyFrame": 7,
     "attackRange": 200,
+    "prefabFlyObj": {
+      "__uuid__": "b7283e8b-6a12-4875-bd9e-2f1dae48eb50"
+    },
     "spMega": {
       "__id__": 6
     },

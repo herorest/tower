@@ -72,7 +72,7 @@ export default class DefenceTowerMega extends GameActor {
         if(enemys && enemys.length > 0){
             let flyObj = cc.instantiate(this.prefabFlyObj).getComponent("GameFlyObj") as GameFlyObj;
             flyObj.node.parent = this.node.parent;
-            flyObj.node.position = cc.v2(this.node.x, this.node.y + 130);
+            flyObj.node.position = cc.v2(this.node.x, this.node.y + 70);
             flyObj.startFly(enemys[0], this);
         }
     }

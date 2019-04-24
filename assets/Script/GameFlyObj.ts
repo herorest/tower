@@ -20,7 +20,7 @@ export default class GameFlyObj extends GameEventListener {
 
     trigger: GameActor = null;
 
-    speed: number = 1000; //速度
+    speed: number = 600; //速度
 
     statusTime: number = 0; // 状态的时间
 
@@ -42,40 +42,37 @@ export default class GameFlyObj extends GameEventListener {
     }
 
     update(dt){
-        super.update(dt);
-
         this.statusTime += dt;
 
         if(this.statusType == GameFlyObjectStatus.Fly){
+            let currentPos = this.node.position;
             let percent = (this.statusTime / this.flyAnimTotalTime) % 1;
             Utils.preferAnimFrame(this.spImage, this.sfFlys, percent);
             
-            let ad = this.node.position.sub(this.target.node.position);
-            let moveDir = ad.normalize(); 
-            let currentPos = this.node.position;
-            let speed = this.speed;
-            let radians = Math.atan2(moveDir.x, moveDir.y);
+            let moveDir = this.target.node.position.sub(currentPos).normalize(); 
+            let radians = Math.atan2(moveDir.y, moveDir.x);
             let angle = cc.misc.radiansToDegrees(radians);
-            this.node.rotation = angle;
+            this.node.rotation = -angle;
 
             this.node.x = cc.misc.clampf(
-                currentPos.x + moveDir.x * dt * speed, 
+                currentPos.x + moveDir.x * dt * this.speed, 
                 Math.min(currentPos.x, this.target.node.x), 
                 Math.max(currentPos.x, this.target.node.x)
             );
             this.node.y = cc.misc.clampf(
-                currentPos.y + moveDir.y * dt * speed, 
+                currentPos.y + moveDir.y * dt * this.speed, 
                 Math.min(currentPos.y, this.target.node.y), 
                 Math.max(currentPos.y, this.target.node.y)
             );
 
             if(this.node.x == this.target.node.x && this.node.y == this.target.node.y){
+                this.statusTime = 0;
                 this.statusType = GameFlyObjectStatus.Explosion;
             }
         }
 
         if(this.statusType == GameFlyObjectStatus.Explosion){
-            let percent = (this.statusTime / this.explotionAnimTotalTime) % 1;
+            let percent = (this.statusTime / this.explotionAnimTotalTime);
             Utils.preferAnimFrame(this.spImage, this.sfElosions, percent);
             if(percent > 1){
                 this.node.removeFromParent(true);
