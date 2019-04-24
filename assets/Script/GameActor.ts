@@ -28,6 +28,8 @@ export default class GameActor extends GameEventListener {
 
     onLoad(){
         super.onLoad();
+
+        //每个actor有自己的一个状态机
         this.machine = new GameActorStatusMachine(this);
     }
 
