@@ -48,7 +48,6 @@ export default class GameWalker extends GameActor {
             let percent = (walkStatus.statusTime / this.animWalkTotalTime) % 1;
             let spriteFrames: cc.SpriteFrame[];
             let scaleX = 1; //用right翻转做left
-
             if(walkStatus.dir === GameDirection.Up){
                 spriteFrames = this.spWalkUp;
             }else if(walkStatus.dir === GameDirection.Down){

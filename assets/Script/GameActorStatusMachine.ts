@@ -95,16 +95,10 @@ export class GameActorStatusWalk extends GameActorStatusBase {
         this.nextPathPoint = this.getNextPathPoint();
 
         if(this.nextPathPoint){
-            let ad = this.nextPathPoint.sub(this.machine.actor.node.position);
-            this.moveDir = ad.normalize();
-            this.dir = this.getDir(this.machine.actor.node.position, this.nextPathPoint);
+            this.moveDir = this.nextPathPoint.sub(this.machine.actor.node.position).normalize();
+            this.dir = Utils.getDir(this.moveDir);
             this.currentPathPointIndex ++;
         }
-    }
-
-    getDir(from: cc.Vec2, to: cc.Vec2): GameDirection{
-        let ad = to.sub(from);
-        return Utils.getDir(ad);
     }
 
     getNextPathPoint(): cc.Vec2{

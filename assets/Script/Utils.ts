@@ -28,7 +28,7 @@ export default class Utils {
     }
 
     static getDir(vec2: cc.Vec2): GameDirection{
-        let radians = Math.atan2(vec2.x, vec2.y);
+        let radians = Math.atan2(vec2.y, vec2.x);
         let angle = cc.misc.radiansToDegrees(radians);
 
         if(angle > 360){
