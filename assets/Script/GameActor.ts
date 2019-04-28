@@ -14,17 +14,30 @@ export default class GameActor extends GameEventListener {
     // 攻击间隔时间
     attackCoolDownTime: number = 1;
 
+    // 攻击总时长
     attackAnimTotalTime: number = 1;
 
+    // 路径点
     paths: cc.Vec2[];
 
-    //发射子弹时的帧
+    // 发射子弹时的帧
     @property(Number) 
     attackKeyFrame: number = 7;
 
     // 默认攻击范围
     @property(Number) 
     attackRange: number = 200;
+
+    // 攻击力
+    @property(Number) 
+    power: number = 10;
+
+    // 生命
+    @property(Number) 
+    maxHealth: number = 20;
+
+    // 剩余生命
+    currHealth: number;
 
     onLoad(){
         super.onLoad();
@@ -56,6 +69,10 @@ export default class GameActor extends GameEventListener {
         let attackStatus = this.machine.currentStatus as GameActorStatusAttack;
         attackStatus.isAttacked = true;
         console.log('attack');
+    }
+
+    isDead(){
+        return this.currHealth <= 0;
     }
 
     

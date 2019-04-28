@@ -120,6 +120,8 @@ export default class TowerCreator extends cc.Component {
                 event.pos = this.node.position;
                 event.towerType = this.currentSelectTower;
                 GameEventDispatcher.getInstance().dispatchEvent(event);
+
+                this.node.removeFromParent(true);
             }
         }
     }

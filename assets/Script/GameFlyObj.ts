@@ -1,6 +1,8 @@
+import { GameEventHit } from './GameEventDefine';
 import GameEventListener from "./GameEventListener";
 import GameActor from "./GameActor";
 import Utils from "./Utils";
+import GameEventDispatcher from './GameEventDispatcher';
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,6 +37,7 @@ export default class GameFlyObj extends GameEventListener {
     }
 
     startFly(target, trigger){
+        target.trigger = trigger;
         this.target = target;
         this.trigger = trigger;
         this.statusType = GameFlyObjectStatus.Fly;
@@ -64,10 +67,17 @@ export default class GameFlyObj extends GameEventListener {
                 Math.min(currentPos.y, this.target.node.y), 
                 Math.max(currentPos.y, this.target.node.y)
             );
+            
 
+            // 打中
             if(this.node.x == this.target.node.x && this.node.y == this.target.node.y){
                 this.statusTime = 0;
                 this.statusType = GameFlyObjectStatus.Explosion;
+
+                let event = new GameEventHit();
+                event.hitter = this.trigger;
+                event.beHitter = this.target;
+                GameEventDispatcher.getInstance().dispatchEvent(event);
             }
         }
 

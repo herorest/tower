@@ -41,12 +41,16 @@ export default class Main extends GameEventListener {
         super.onLoad();
         Main._instance =  this;
 
-        // 创建塔
+        // 创建一个towerCreator
         let towers = this.map.getObjectGroup('towers');
         let tower0 = towers.getObject('tower0');
         let towerCreator = cc.instantiate(this.prefabTowerCreator);
         towerCreator.parent = this.towersParent;
         towerCreator.position = Utils.tileCoordForPosition(this.map, tower0.offset);
+
+        //注册通用的创建塔事件，具体使用放在towerCreator中dispatch
+        this.eventComponent.registEvent(GameEventType.CreateTower, this.onEventCreateTower);
+        this.eventComponent.registEvent(GameEventType.Dead, this.onEventDead);
 
 
         // 测试路径
@@ -65,8 +69,6 @@ export default class Main extends GameEventListener {
         walk.paths = Utils.tilePolylineForPositions(startPos, path0.polylinePoints);
         enemy.machine.onStatusChange(walk);
 
-        this.eventComponent.registEvent(GameEventType.CreateTower, this.onEventCreateTower);
-
     }
 
     onEventCreateTower(event){
@@ -83,5 +85,12 @@ export default class Main extends GameEventListener {
         }
 
         return false;
+    }
+
+    onEventDead(event){
+        this.enemys = this.enemys.filter((i) => {
+            return i !== event.trigger
+        });
+        console.log(this.enemys);
     }
 }

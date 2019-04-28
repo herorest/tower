@@ -1,12 +1,17 @@
 import GameActor from "./GameActor";
-import {GameActorStatusBase, GameActorStatusType, GameActorStatusWalk} from './GameActorStatusMachine'
+import {GameActorStatusBase, GameActorStatusType, GameActorStatusWalk, GameActorStatusDead} from './GameActorStatusMachine'
 import { GameDirection } from "./Config";
 import Utils from "./Utils";
+import {GameEventType} from "./GameEventDefine";
+import GameHpBar from "./GameHpBar";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class GameWalker extends GameActor {
+
+    @property(cc.Prefab)
+    prefabHpBar: cc.Prefab = null;
 
     @property(cc.Sprite)
     spWalker: cc.Sprite = null;
@@ -20,14 +25,36 @@ export default class GameWalker extends GameActor {
     @property([cc.SpriteFrame])
     spWalkRight: cc.SpriteFrame[] = [];
 
+    @property([cc.SpriteFrame])
+    spDead: cc.SpriteFrame[] = [];
+
     @property(Number)
     animWalkTotalTime: number = 1;
+
+    @property(Number)
+    animDeadTotalTime: number = 0.5;
     
     @property(Number)
     speed: number = 20;
 
+    hpbar = null;
+
     onLoad(){
         super.onLoad();
+        let hpbar = cc.instantiate(this.prefabHpBar);
+        hpbar.parent = this.node;
+        hpbar.y = 30;
+        this.hpbar = hpbar.getComponent("GameHpBar") as GameHpBar;
+        this.eventComponent.registEvent(GameEventType.Hit, this.onEventHit);
+        this.currHealth = this.maxHealth;
+    }
+
+    onEventHit(e){
+        if(e.beHitter === this){
+            let power = e.hitter.power;
+            this.currHealth -= power;
+            this.hpbar.setHpPercent(this.currHealth / this.maxHealth);
+        }
     }
 
     getPaths(): cc.Vec2[]{
@@ -61,8 +88,10 @@ export default class GameWalker extends GameActor {
 
             Utils.preferAnimFrame(this.spWalker, spriteFrames, percent);
             this.spWalker.node.scaleX = scaleX;
+        }else if(status.status == GameActorStatusType.Dead){
+            let deadStatus = status as GameActorStatusDead;
+            let percent = Math.min(deadStatus.statusTime / this.animDeadTotalTime);
+            let currentFrame = Utils.preferAnimFrame(this.spWalker, this.spDead, percent);
         }
     }
-
-    
 }

@@ -2,13 +2,15 @@ import Utils from './Utils'
 import { GameDirection } from './Config';
 import GameActor from './GameActor';
 import GameWalker from './GameWalker';
+import {GameEventDead} from './GameEventDefine';
+import GameEventDispatcher from './GameEventDispatcher';
 
 export enum GameActorStatusType{
     None,
     Idle,   //空闲状态
     Walk,   //移动
     Attack, //攻击
-    Die     //死亡
+    Dead     //死亡
 }
 
 export default class GameActorStatusMachine {
@@ -60,7 +62,6 @@ export class GameActorStatusIdle extends GameActorStatusBase {
 
     //接收状态，转换精灵图
     onEnterStatus(){
-        console.log('------------enter Status', this.status);
         this.machine.actor.preferStatus(this);
     }
 
@@ -111,6 +112,13 @@ export class GameActorStatusWalk extends GameActorStatusBase {
     update(dt: number){
         super.update(dt);
 
+        // 判断是否死亡
+        if(this.machine.actor.isDead()){
+            let die = new GameActorStatusDead();
+            this.machine.onStatusChange(die);
+            return;
+
+        }
         this.machine.actor.preferStatus(this);
 
         if(!this.nextPathPoint){
@@ -161,7 +169,25 @@ export class GameActorStatusAttack extends GameActorStatusBase {
     }
 }
 
-export class GameActorStatusDie extends GameActorStatusBase {
-    status = GameActorStatusType.Die;
+export class GameActorStatusDead extends GameActorStatusBase {
+    status = GameActorStatusType.Dead;
+
+    //接收状态，转换精灵图
+    onEnterStatus(){
+        let deadEvent = new GameEventDead();
+        deadEvent.trigger = this.machine.actor;
+        GameEventDispatcher.getInstance().dispatchEvent(deadEvent);
+    }
+
+    update(dt){
+        super.update(dt);
+        this.machine.actor.preferStatus(this);
+
+        // 大于2秒时，移除
+        if(this.statusTime > 2){
+            this.machine.actor.node.destroy();
+
+        }
+    }
 }
 

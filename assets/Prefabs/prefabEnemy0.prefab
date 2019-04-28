@@ -188,6 +188,11 @@
     "_enabled": true,
     "attackKeyFrame": 7,
     "attackRange": 200,
+    "power": 10,
+    "maxHealth": 20,
+    "prefabHpBar": {
+      "__uuid__": "e1c05cac-647f-4f29-adf8-7c144f653796"
+    },
     "spWalker": {
       "__id__": 3
     },
@@ -303,6 +308,23 @@
       },
       {
         "__uuid__": "3e51d695-dc12-4294-9450-698868f7aa96"
+      }
+    ],
+    "spDead": [
+      {
+        "__uuid__": "76301228-0d38-4559-b286-ca4e9fc0fcb8"
+      },
+      {
+        "__uuid__": "91314bad-68ae-499c-af8f-32549ccaa197"
+      },
+      {
+        "__uuid__": "1b629250-fc6b-4af2-be98-5d7bf81931fb"
+      },
+      {
+        "__uuid__": "71ea1165-5fb1-4b50-a8ae-62856356281e"
+      },
+      {
+        "__uuid__": "8b2d1699-dd65-4eeb-99d1-dff8dea38ab1"
       }
     ],
     "animWalkTotalTime": 1,
