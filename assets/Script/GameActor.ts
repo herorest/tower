@@ -34,7 +34,7 @@ export default class GameActor extends GameEventListener {
 
     // 生命
     @property(Number) 
-    maxHealth: number = 20;
+    maxHealth: number = 25;
 
     // 剩余生命
     currHealth: number;
@@ -52,7 +52,12 @@ export default class GameActor extends GameEventListener {
     }
 
     getEnemysInRange(): GameActor[]{
-        return Main.getInstance().enemys;
+        let enemys = Main.getInstance().enemys;
+        enemys = enemys.filter((i) => {
+            return !i.isDead() && i.node.position.sub(this.node.position).mag() < this.attackRange
+        });
+
+        return enemys;
     }
 
     update(dt){
