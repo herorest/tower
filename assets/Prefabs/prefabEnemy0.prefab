@@ -187,9 +187,9 @@
     },
     "_enabled": true,
     "attackKeyFrame": 7,
-    "attackRange": 200,
+    "attackRange": 300,
     "power": 10,
-    "maxHealth": 20,
+    "maxHealth": 25,
     "prefabHpBar": {
       "__uuid__": "e1c05cac-647f-4f29-adf8-7c144f653796"
     },
@@ -327,8 +327,9 @@
         "__uuid__": "8b2d1699-dd65-4eeb-99d1-dff8dea38ab1"
       }
     ],
-    "animWalkTotalTime": 1,
-    "speed": 50,
+    "animWalkTotalTime": 0.5,
+    "animDeadTotalTime": 0.5,
+    "speed": 100,
     "_id": ""
   },
   {

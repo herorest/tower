@@ -85,7 +85,6 @@ export class GameActorStatusWalk extends GameActorStatusBase {
     dir: GameDirection;
     
     onEnterStatus(){
-        // this.paths = (this.machine.actor as GameWalker).getPaths();
         this.currentPathPointIndex = 0;
         this.machine.actor.node.x = this.paths[0].x;
         this.machine.actor.node.y = this.paths[0].y;

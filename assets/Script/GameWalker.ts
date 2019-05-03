@@ -35,7 +35,7 @@ export default class GameWalker extends GameActor {
     animDeadTotalTime: number = 0.5;
     
     @property(Number)
-    speed: number = 20;
+    speed: number = 10;
 
     hpbar = null;
 
