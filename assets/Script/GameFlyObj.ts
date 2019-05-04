@@ -3,8 +3,11 @@ import GameEventListener from "./GameEventListener";
 import GameActor from "./GameActor";
 import Utils from "./Utils";
 import GameEventDispatcher from './GameEventDispatcher';
+import GamePoolManager, { PoolType } from './GamePoolManager';
 
 const { ccclass, property } = cc._decorator;
+
+const POOLTYPEENUM = cc.Enum(PoolType);
 
 @ccclass
 export default class GameFlyObj extends GameEventListener {
@@ -17,6 +20,9 @@ export default class GameFlyObj extends GameEventListener {
 
     @property([cc.SpriteFrame])
     sfElosions: cc.SpriteFrame[] = [];
+
+    @property({type: POOLTYPEENUM})
+    poolType: PoolType = PoolType.None;
 
     target: GameActor = null;
 
@@ -85,7 +91,9 @@ export default class GameFlyObj extends GameEventListener {
             let percent = (this.statusTime / this.explotionAnimTotalTime);
             Utils.preferAnimFrame(this.spImage, this.sfElosions, percent);
             if(percent > 1){
-                this.node.removeFromParent(true);
+                // this.node.removeFromParent(true);
+                this.node.removeFromParent(false);
+                GamePoolManager.getInstance().recycleObj(POOLTYPEENUM.MegaTowerFlyObj, this);
             }
         }
     }

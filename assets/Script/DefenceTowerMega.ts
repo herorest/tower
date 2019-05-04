@@ -4,6 +4,7 @@ import { GameActorStatusBase, GameActorStatusType, GameActorStatusAttack } from 
 import { GameDirection } from './Config';
 import Utils from './Utils';
 import GameFlyObj from './GameFlyObj';
+import GamePoolManager, { PoolType } from './GamePoolManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -70,7 +71,9 @@ export default class DefenceTowerMega extends GameActor {
         super.attack();
         let enemys = this.getEnemysInRange();
         if(enemys && enemys.length > 0){
-            let flyObj = cc.instantiate(this.prefabFlyObj).getComponent("GameFlyObj") as GameFlyObj;
+            let flyObj = GamePoolManager.getInstance().getObj(PoolType.MegaTowerFlyObj).getComponent("GameFlyObj") as GameFlyObj;
+
+            // let flyObj = cc.instantiate(this.prefabFlyObj).getComponent("GameFlyObj") as GameFlyObj;
             flyObj.node.parent = this.node.parent;
             flyObj.node.position = cc.v2(this.node.x, this.node.y + 70);
             flyObj.startFly(enemys[0], this);

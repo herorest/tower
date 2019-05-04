@@ -27,6 +27,9 @@ export default class Main extends GameEventListener {
     towersParent: cc.Node = null;
 
     @property(cc.Prefab)
+    prefabPoolManager: cc.Prefab = null;
+
+    @property(cc.Prefab)
     prefabTowerCreator: cc.Prefab = null;
 
     @property(cc.Prefab)
@@ -45,6 +48,10 @@ export default class Main extends GameEventListener {
     onLoad() {
         super.onLoad();
         Main._instance =  this;
+
+        // 子弹池
+        let poolManager = cc.instantiate(this.prefabPoolManager);
+        poolManager.parent = this.node;
 
         this.generateTowerCreator();
 

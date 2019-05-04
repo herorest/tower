@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.23931121826171875,
-      "y": 0.23931121826171875,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_quat": {
@@ -342,7 +342,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "groupIndex": 0,
-    "_id": "5bCar/r19LJovqJt/CKLvv"
+    "_id": "9eMZsGBuZIH572UpYkrkTf"
   },
   {
     "__type__": "cc.TiledLayer",
@@ -352,7 +352,7 @@
       "__id__": 6
     },
     "_enabled": true,
-    "_id": "436aY58K9PHobCt6WTQEzI"
+    "_id": "c8nxodafBLZLBX9JziFx9A"
   },
   {
     "__type__": "cc.Node",
@@ -412,7 +412,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "groupIndex": 0,
-    "_id": "d7IkJL7ANM/6t12GLIvjnk"
+    "_id": "bfgXE5qnNPz7r3LrnAqQGP"
   },
   {
     "__type__": "cc.TiledObjectGroup",
@@ -422,7 +422,7 @@
       "__id__": 8
     },
     "_enabled": true,
-    "_id": "0cw97aPSBL27irexp+6bzB"
+    "_id": "adF9tvXA1N+IfLEIUJicqz"
   },
   {
     "__type__": "cc.Node",
@@ -482,7 +482,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "groupIndex": 0,
-    "_id": "69/pKQP01Hi5QGpDYCFpp8"
+    "_id": "80o0y8l0ZDMZpfLOkxvqfs"
   },
   {
     "__type__": "cc.TiledObjectGroup",
@@ -492,7 +492,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "_id": "b0RNqOIxdNhZOsM1EMFW3T"
+    "_id": "d8rIjs6ltFVqQwFa1kgA+s"
   },
   {
     "__type__": "cc.TiledMap",
@@ -547,6 +547,9 @@
     },
     "towersParent": {
       "__id__": 16
+    },
+    "prefabPoolManager": {
+      "__uuid__": "b513ea74-3083-48ba-ac34-a59fee81a651"
     },
     "prefabTowerCreator": {
       "__uuid__": "37bc62fb-3e8c-423b-9c2b-4a21cee91cc2"
