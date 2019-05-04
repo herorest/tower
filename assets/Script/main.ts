@@ -1,4 +1,4 @@
-import { DefenceTowerType } from './Config';
+import { DefenceTowerType, GameConfig } from './Config';
 import { GameEventType } from './GameEventDefine';
 import Utils from './Utils'
 import { GameActorStatusWalk, GameActorStatusIdle } from './GameActorStatusMachine';
@@ -48,6 +48,10 @@ export default class Main extends GameEventListener {
     onLoad() {
         super.onLoad();
         Main._instance =  this;
+        GameConfig.loadConfig();
+    }
+
+    startGame(){
 
         // 子弹池
         let poolManager = cc.instantiate(this.prefabPoolManager);

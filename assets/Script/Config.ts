@@ -1,3 +1,5 @@
+import Main from "./main";
+
 export enum DefenceTowerType{
     None,
     Archer,
@@ -12,4 +14,14 @@ export enum GameDirection{
     Down,
     Left,
     Right
+}
+
+export class GameConfig{
+    static config = null;
+    static loadConfig(){
+        cc.loader.loadRes("config", (error, resource) => {
+            GameConfig.config = resource.json;
+            Main.getInstance().startGame();
+        });
+    } 
 }

@@ -1,0 +1,15 @@
+{
+    "towers": {
+        "mega": {
+            "attackRange": 400,
+            "power": 20,
+            "maxHealth": 25
+        }
+    },
+
+    "walker": {
+        "thief": {
+            "maxHealth": 30
+        }
+    }
+}

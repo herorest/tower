@@ -1,7 +1,7 @@
 import { GameFlyObjectStatus } from './GameFlyObj';
 import GameActor from './GameActor'
 import { GameActorStatusBase, GameActorStatusType, GameActorStatusAttack } from './GameActorStatusMachine';
-import { GameDirection } from './Config';
+import { GameDirection, GameConfig } from './Config';
 import Utils from './Utils';
 import GameFlyObj from './GameFlyObj';
 import GamePoolManager, { PoolType } from './GamePoolManager';
@@ -40,6 +40,12 @@ export default class DefenceTowerMega extends GameActor {
 
     onLoad(){
         super.onLoad();
+
+        let config = GameConfig.config.towers.mega;
+
+        for(let key in config){
+            this[key] = config[key];
+        }
     }
 
     update(dt){
@@ -73,7 +79,6 @@ export default class DefenceTowerMega extends GameActor {
         if(enemys && enemys.length > 0){
             let flyObj = GamePoolManager.getInstance().getObj(PoolType.MegaTowerFlyObj).getComponent("GameFlyObj") as GameFlyObj;
 
-            // let flyObj = cc.instantiate(this.prefabFlyObj).getComponent("GameFlyObj") as GameFlyObj;
             flyObj.node.parent = this.node.parent;
             flyObj.node.position = cc.v2(this.node.x, this.node.y + 70);
             flyObj.startFly(enemys[0], this);

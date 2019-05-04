@@ -1,6 +1,6 @@
 import GameActor from "./GameActor";
 import {GameActorStatusBase, GameActorStatusType, GameActorStatusWalk, GameActorStatusDead} from './GameActorStatusMachine'
-import { GameDirection } from "./Config";
+import { GameDirection, GameConfig } from "./Config";
 import Utils from "./Utils";
 import {GameEventType} from "./GameEventDefine";
 import GameHpBar from "./GameHpBar";
@@ -46,6 +46,13 @@ export default class GameWalker extends GameActor {
         hpbar.y = 30;
         this.hpbar = hpbar.getComponent("GameHpBar") as GameHpBar;
         this.eventComponent.registEvent(GameEventType.Hit, this.onEventHit);
+
+        let config = GameConfig.config.walker.thief;
+
+        for(let key in config){
+            this[key] = config[key];
+        }
+
         this.currHealth = this.maxHealth;
     }
 
