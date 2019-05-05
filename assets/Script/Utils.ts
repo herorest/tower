@@ -48,9 +48,15 @@ export default class Utils {
         }
     }
     
-    //展示动画，根据百分比
+    // 展示动画，根据百分比
     static preferAnimFrame(sprite: cc.Sprite, frames: cc.SpriteFrame[], percent: number): SpriteFrame{
         sprite.spriteFrame = frames[Math.floor(frames.length * percent)];
         return sprite.spriteFrame;
+    }
+
+    static orderByPosY(nodes){
+        nodes.sort((a,b) => {
+            return a.y > b.y ? -1 : 1
+        });
     }
 }

@@ -9,7 +9,8 @@
 
     "walker": {
         "thief": {
-            "maxHealth": 30
+            "maxHealth": 30,
+            "speed": 100
         }
     }
 }

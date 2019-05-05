@@ -68,7 +68,7 @@ export default class Main extends GameEventListener {
         this.path0 = paths.getObject('path0');
         this.startPos = Utils.tileCoordForPosition(this.map, this.path0.offset);
 
-        this.schedule(this.generateEnemy, 3, 20, 5);
+        this.schedule(this.generateEnemy, 2, 50, 1);
     }
 
     onEventCreateTower(event){
@@ -120,5 +120,13 @@ export default class Main extends GameEventListener {
         walk.paths = Utils.tilePolylineForPositions(this.startPos, this.path0.polylinePoints);
         enemy.machine.onStatusChange(walk);
 
+    }
+
+    update(){
+        let nodes = this.enemys.map((v, i) => v.node);
+        Utils.orderByPosY(nodes);
+        nodes.forEach((v, i) => {
+            v.zIndex = i;
+        });
     }
 }

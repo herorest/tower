@@ -1,4 +1,3 @@
-import { GameFlyObjectStatus } from './GameFlyObj';
 import GameActor from './GameActor'
 import { GameActorStatusBase, GameActorStatusType, GameActorStatusAttack } from './GameActorStatusMachine';
 import { GameDirection, GameConfig } from './Config';
