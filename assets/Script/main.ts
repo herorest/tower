@@ -7,6 +7,7 @@ import GameActor from './GameActor';
 import DefenceTowerMega from './DefenceTowerMega';
 import GameEventListener from './GameEventListener';
 import TowerCreator, { TowerCreatorStatus } from './TowerCreator';
+import camaraControl from './camaraControl';
 
 
 const { ccclass, property } = cc._decorator;

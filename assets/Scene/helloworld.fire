@@ -15,9 +15,6 @@
     "_children": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 16
       }
     ],
     "_active": false,
@@ -44,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.2093999529275658,
+      "y": 0.2093999529275658,
       "z": 1
     },
     "_quat": {
@@ -78,13 +75,16 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 13
-      },
-      {
         "__id__": 14
       },
       {
         "__id__": 15
+      },
+      {
+        "__id__": 16
+      },
+      {
+        "__id__": 17
       }
     ],
     "_prefab": null,
@@ -190,7 +190,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "groupIndex": 0,
-    "_id": "d8w7NQe1ZAH67ZC3zo2dAf"
+    "_id": "04u7Sqlp9KZ5jnJDoB/ZVI"
   },
   {
     "__type__": "cc.Camera",
@@ -210,9 +210,9 @@
       "a": 255
     },
     "_depth": -1,
-    "_zoomRatio": 1,
+    "_zoomRatio": 2,
     "_targetTexture": null,
-    "_id": "f4lUsl/uVEaIHHcmFRkVW2"
+    "_id": "50f4rTQc9Bvqb9y+QPst0u"
   },
   {
     "__type__": "cc.Node",
@@ -230,13 +230,16 @@
       },
       {
         "__id__": 10
+      },
+      {
+        "__id__": 12
       }
     ],
     "_active": true,
     "_level": 2,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 13
       }
     ],
     "_prefab": null,
@@ -495,6 +498,62 @@
     "_id": "d8rIjs6ltFVqQwFa1kgA+s"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "towersParent",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 5
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 3,
+    "_components": [],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 2048,
+      "height": 1536
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "groupIndex": 0,
+    "_id": "5bWjrIioJGK4qbSDi07wfC"
+  },
+  {
     "__type__": "cc.TiledMap",
     "_name": "",
     "_objFlags": 0,
@@ -543,10 +602,10 @@
     },
     "_enabled": true,
     "map": {
-      "__id__": 12
+      "__id__": 13
     },
     "towersParent": {
-      "__id__": 16
+      "__id__": 12
     },
     "prefabPoolManager": {
       "__uuid__": "b513ea74-3083-48ba-ac34-a59fee81a651"
@@ -563,59 +622,16 @@
     "_id": "48COLGIsxIJpV22aM4OlCe"
   },
   {
-    "__type__": "cc.Node",
-    "_name": "towersParent",
+    "__type__": "d12f5AT3bNMTJucgwo63PCs",
+    "_name": "",
     "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
+    "node": {
+      "__id__": 2
     },
-    "_children": [],
-    "_active": true,
-    "_level": 1,
-    "_components": [],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
+    "_enabled": true,
+    "camera": {
+      "__id__": 4
     },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 2048,
-      "height": 1536
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 1024,
-      "y": 768,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "groupIndex": 0,
-    "_id": "5bWjrIioJGK4qbSDi07wfC"
+    "_id": "9esUGdZStH17RQZ4D3fDUW"
   }
 ]
